@@ -13,4 +13,4 @@ MemoryCaptures/
 .vscode/
 
 # all meta files
-*.meta
+# *.meta
