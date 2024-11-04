@@ -64,7 +64,7 @@ public class Spin_Visualizer : MonoBehaviour
 
         // set the current file number to the start value (0)
         // currentFileNumber = 0;
-        currentFileNumber = 300;
+        currentFileNumber = 10;
 
         // string relativePath = $"energy_comp/energy/json_data/";
         string relativePath = $"atomistic_FINAL_creation_ROMMING/json_data/";
@@ -168,6 +168,10 @@ public class Spin_Visualizer : MonoBehaviour
             // if the end is not reached
             if(currentFileNumber < fileCount-2)
             {
+                
+                // log the current file number
+                UnityEngine.Debug.Log("currentFileNumber: " + currentFileNumber);
+
                 // Increment the file number
                 currentFileNumber++;
 
@@ -615,9 +619,9 @@ public class Spin_Visualizer : MonoBehaviour
         // Configure output file path to include currentFileNumber
         string fileName = $"video_{currentFileNumber.ToString("D4")}";
 
-        // Configure other settings like output file path, frame rate, etc.
-        videoRecorder.OutputFile = Path.Combine(Application.streamingAssetsPath, "OUTPUT", fileName);
-
+        // Use Application.dataPath to get project path
+        string projectPath = Directory.GetParent(Application.dataPath).FullName;
+        videoRecorder.OutputFile = Path.Combine(projectPath, "OUTPUT", fileName);
         controllerSettings.AddRecorderSettings(videoRecorder);
         controllerSettings.SetRecordModeToManual();
         controllerSettings.FrameRate = 30.0f;  // Example frame rate
