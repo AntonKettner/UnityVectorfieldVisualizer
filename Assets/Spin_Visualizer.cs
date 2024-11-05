@@ -64,12 +64,13 @@ public class Spin_Visualizer : MonoBehaviour
 
         // set the current file number to the start value (0)
         // currentFileNumber = 0;
-        currentFileNumber = 10;
+        currentFileNumber = 0;
 
         // string relativePath = $"energy_comp/energy/json_data/";
-        string relativePath = $"atomistic_FINAL_creation_ROMMING/json_data/";
+        // string relativePath = $"atomistic_FINAL_creation_ROMMING/json_data/";
+        string relativePath = $"x_current/";
         string folderPath = Path.Combine(Application.streamingAssetsPath, relativePath);
-        fileCount = Directory.GetFiles(folderPath, "*.json").Length;
+        fileCount = Directory.GetFiles(folderPath, "*.db").Length;
 
         // log the file count
         UnityEngine.Debug.Log("fileCount in start: " + fileCount);
@@ -342,7 +343,7 @@ public class Spin_Visualizer : MonoBehaviour
         currentFileNumber++;
 
         // The number of files in the folder
-        string relativePath = $"energy_comp/energy/json_data/";
+        string relativePath = $"x_current/";
         string folderPath = Path.Combine(Application.streamingAssetsPath, relativePath);
         int fileCount = Directory.GetFiles(folderPath).Length;
         // Check if we have reached the end of the files
