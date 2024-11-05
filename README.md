@@ -70,7 +70,7 @@ Running the Visualization
 
 ## 📷 Low res example of the output mp4
 
-![Skyr](Assets/ReadmeAssets/skyrmion_Unity.png)
+![Skyr](Assets/ReadmeAssets/skyrmion_Unity.gif)
 
 ## 🤝 Contributing
 
