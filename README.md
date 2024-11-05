@@ -68,6 +68,8 @@ Running the Visualization
 
 -> OPTIONAL: DeleteOldMP4sScript.ps1 deletes all "video_*.mp4" scripts in the folder to be ready for the next recording
 
+This Repo was tested with Unity Editor Version 2022.3.2f1
+
 ## 📷 Low res example of the output mp4
 
 ![Skyr](Assets/ReadmeAssets/skyrmion_Unity.gif)
