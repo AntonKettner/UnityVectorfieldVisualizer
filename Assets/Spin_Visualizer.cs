@@ -58,16 +58,11 @@ public class Spin_Visualizer : MonoBehaviour
         // Check if the data loader was found
         if (dataLoader == null)
         {
-            // UnityEngine.Debug.LogError("Skyr_data_loader component not found in the Start func.");
             return;
         }
 
-        // set the current file number to the start value (0)
-        // currentFileNumber = 0;
         currentFileNumber = 0;
 
-        // string relativePath = $"energy_comp/energy/json_data/";
-        // string relativePath = $"atomistic_FINAL_creation_ROMMING/json_data/";
         string relativePath = $"x_current/";
         string folderPath = Path.Combine(Application.streamingAssetsPath, relativePath);
         fileCount = Directory.GetFiles(folderPath, "*.db").Length;
@@ -102,11 +97,6 @@ public class Spin_Visualizer : MonoBehaviour
                 // Load the data
                 StartCoroutine(loadandvisualize());
             }
-            // else
-            // {
-            //     // log that end has been reached
-            //     UnityEngine.Debug.Log("end has been reached");
-            // }
 
             // log the current file number
             UnityEngine.Debug.Log("spinfield: " + (currentFileNumber + 1) + " / " + fileCount);
@@ -123,12 +113,7 @@ public class Spin_Visualizer : MonoBehaviour
                 // Load the data
                 StartCoroutine(loadandvisualize());
             }
-            // else
-            // {
-            //     // log that start has been reached
-            //     UnityEngine.Debug.Log("start has been reached");
-            // }
-            // log the current file number
+
             UnityEngine.Debug.Log("spinfield: " + (currentFileNumber + 1) + " / " + fileCount);
         }
 
@@ -140,15 +125,6 @@ public class Spin_Visualizer : MonoBehaviour
             
             // log the current file number
             UnityEngine.Debug.Log("play after Toggle: " + play);
-
-            // if(!play)
-            // {
-            //     // execute powershell script
-            //     Compress_mp4s();
-
-            //     // // delete old mp4s
-            //     // DeleteOldMP4sScript();
-            // }
         }
 
         // Toggle playbackwards mode when key B is pressed
@@ -195,8 +171,6 @@ public class Spin_Visualizer : MonoBehaviour
                     recorderController.StartRecording();
                 }
 
-                // Load and show the data
-                // UnityEngine.Debug.Log("stopped visualization");
                 StartCoroutine(loadandvisualize());
             }
             else
@@ -214,13 +188,7 @@ public class Spin_Visualizer : MonoBehaviour
                     recorderController.StopRecording();
 
                 }
-
-                // // delete old mp4s
-                // DeleteOldMP4sScript();
             }
-
-            // // log the current file number
-            // UnityEngine.Debug.Log("spinfield: " + (currentFileNumber + 1) + " / " + fileCount);
         }
 
         // get to the next data set if loop mode is enabled
@@ -242,86 +210,9 @@ public class Spin_Visualizer : MonoBehaviour
                 // log that start has been reached
                 UnityEngine.Debug.Log("back to start");
             }
-            
-            // // log the current file number
-            // UnityEngine.Debug.Log("spinfield: " + (currentFileNumber + 1) + " / " + fileCount);
         }
     }
 
-
-    // public void DeleteOldMP4sScript()
-    // {
-    //     UnityEngine.Debug.Log("DeleteOldMP4sScript method called.");
-
-    //     string pathToScript = Application.streamingAssetsPath + "/OUTPUT/DeleteOldMP4sScript.ps1";
-    //     UnityEngine.Debug.Log("Path to PowerShell script: " + pathToScript);
-
-    //     ProcessStartInfo startInfo = new ProcessStartInfo()
-    //     {
-    //         FileName = "powershell.exe",
-    //         Arguments = $"-NoProfile -ExecutionPolicy Unrestricted -File \"{pathToScript}\"",
-    //         RedirectStandardOutput = true,
-    //         RedirectStandardError = true,
-    //         UseShellExecute = false,
-    //         CreateNoWindow = true
-    //     };
-
-    //     Process process = new Process()
-    //     {
-    //         StartInfo = startInfo
-    //     };
-
-    //     try
-    //     {
-    //         process.Start();
-    //         string output = process.StandardOutput.ReadToEnd();
-    //         string errors = process.StandardError.ReadToEnd();
-    //         process.WaitForExit();
-
-    //         if (!string.IsNullOrEmpty(output))
-    //         {
-    //             UnityEngine.Debug.Log("PowerShell Output: " + output);
-    //         }
-    //         if (!string.IsNullOrEmpty(errors))
-    //         {
-    //             UnityEngine.Debug.LogError("PowerShell Errors: " + errors);
-    //         }
-    //     }
-    //     catch (System.Exception e)
-    //     {
-    //         UnityEngine.Debug.LogError("Error executing PowerShell script: " + e.Message);
-    //     }
-    // }
-
-    // public void Compress_mp4s()
-    // {
-    //     UnityEngine.Debug.Log("Compress_mp4s method called.");
-    //     string original_WD = Directory.GetCurrentDirectory();
-    //     string custom_WD = Application.streamingAssetsPath + "/OUTPUT";
-    //     Directory.SetCurrentDirectory(custom_WD);
-
-    //     string pathToScript = Application.streamingAssetsPath + "/OUTPUT/compress.ps1";
-    //     UnityEngine.Debug.Log("Path to PowerShell script: " + pathToScript);
-
-    //     ProcessStartInfo startInfo = new ProcessStartInfo()
-    //     {
-    //         FileName = "powershell.exe",
-    //         Arguments = $"-NoProfile -ExecutionPolicy Unrestricted -File \"{pathToScript}\"",
-    //         RedirectStandardOutput = true,
-    //         RedirectStandardError = true,
-    //         UseShellExecute = false,
-    //         CreateNoWindow = true
-    //     };
-
-    //     Process process = new Process()
-    //     {
-    //         StartInfo = startInfo
-    //     };
-
-
-    //     process.Start();
-    //     Directory.SetCurrentDirectory(original_WD);
-    // }
 
     IEnumerator loadandvisualize()
     {
@@ -332,45 +223,6 @@ public class Spin_Visualizer : MonoBehaviour
 
         yield return null;
     }
-
-
-
-
-
-    IEnumerator LoopThroughData()
-    {
-        // Increment the file number
-        currentFileNumber++;
-
-        // The number of files in the folder
-        string relativePath = $"x_current/";
-        string folderPath = Path.Combine(Application.streamingAssetsPath, relativePath);
-        int fileCount = Directory.GetFiles(folderPath).Length;
-        // Check if we have reached the end of the files
-
-        for (int i = currentFileNumber; i < fileCount; i++)
-        {
-            // Load the data
-            dataLoader.LoadData(i);
-
-            
-            // Visualize the data
-            UpdateData();
-
-            // Wait until animationcounter == 0
-            yield return new WaitUntil(() => animationCounter == 0);
-            // yield return new WaitForSeconds(0.1f);
-
-            dataLoader = null;
-            // Get the data loader
-            dataLoader = GetComponent<Skyr_data_loader>();
-        }
-
-    }
-
-    
-
-
 
     IEnumerator VisualizeData()
     {
@@ -445,16 +297,10 @@ public class Spin_Visualizer : MonoBehaviour
                     dataLoader.data.y_Rot[i],
                     0 // Ignore z rotation
                 );
-                // dataPoint.transform.rotation = direction; // old
-                // this is new
-                // Quaternion currentTarget = dataPointComponent.TargetRotation;
+
                 direction = Quaternion.Normalize(direction);
                 dataPoint.transform.rotation = direction;
 
-                // turn off right now
-                // dataPoint.transform.localScale = new Vector3(dataLoader.data.scalefactor[i], dataLoader.data.scalefactor[i], dataLoader.data.scalefactor[i]); 
-
-                // Set its color based on y-value
                 Renderer renderer = dataPoint.GetComponentInChildren<Renderer>();
                 if (renderer != null)
                 {
@@ -481,42 +327,19 @@ public class Spin_Visualizer : MonoBehaviour
             }
             yield return null;
         }
-        // dataPoint.transform.rotation = targetRotation; // Ensure final rotation is set
         animationCounter--;
-    }
-
-    IEnumerator AnimationCounterCheck()
-    {
-        // wait for 1 sec
-        yield return new WaitForSeconds(1.0f);
-        UnityEngine.Debug.Log("animations finished");
     }
 
     void UpdateData()
     {
-        // // Reset all data points
-        // foreach (GameObject dataPoint in dataPointPool)
-        // {
-        //     dataPoint.SetActive(false);
-        //     // UnityEngine.Debug.Log("data_detected");
-        // }
-
         // Reset the next data point index
         nextDataPointIndex = 0;
         
-        // // start a separate coroutine checking for animationCounter == 0
-        // StartCoroutine(AnimationCounterCheck());      
-
         // Loop over the data
         for (int i = 0; i < dataLoader.data.x.Count; i++)
         {
             if (!(dataLoader.data.x_Rot[i] == 0 && dataLoader.data.y_Rot[i] == 90))
             {
-                // if (i==10000)
-                // {
-                //     PrintGameObjectInfo(dataPointPool[i]);
-                // }
-                // Get the next data point from the pool
                 GameObject dataPoint = dataPointPool[nextDataPointIndex];
                 
                 // Check if a data point can be taken from the pool
@@ -531,9 +354,7 @@ public class Spin_Visualizer : MonoBehaviour
                     dataLoader.data.y_Rot[i],
                     0 // Ignore z rotation
                 );
-                // dataPoint.transform.rotation = Quaternion.Euler(direction); // old
 
-                // dataPoint.transform.rotation = Quaternion.Slerp(dataPoint.transform.rotation, direction, animtime); // new --> does not work because animtime does not change
                 Color current_color = dataPoint.GetComponentInChildren<Renderer>().material.color;
                 Color next_color = Colorpicker(dataLoader.data.x_Rot[i]);
 
@@ -541,23 +362,12 @@ public class Spin_Visualizer : MonoBehaviour
                 {
                     StartCoroutine(AnimateRotation(dataPoint, direction, current_color, next_color, animtime)); // new_2 --> start coroutine for each animation
                 }
-                // dataPoint.transform.localScale = new Vector3(dataLoader.data.scalefactor[i], dataLoader.data.scalefactor[i], dataLoader.data.scalefactor[i]);
 
                 if (i==1000)
                 {
                     UnityEngine.Debug.Log("scalefactor: " + dataLoader.data.scalefactor[i]);
                 }
 
-                // // Set its color based on y-value
-                // Renderer renderer = dataPoint.GetComponentInChildren<Renderer>();
-                // if (renderer != null)
-                // {
-                    
-                //     renderer.material.color = color;
-                // }
-
-                // // Make it active
-                // dataPoint.SetActive(true);
             }
         }
     }
@@ -585,19 +395,6 @@ public class Spin_Visualizer : MonoBehaviour
         }
 
         return next_color;
-    }
-
-    void PrintGameObjectInfo(GameObject obj)
-    {
-        UnityEngine.Debug.Log("GameObject name: " + obj.name);
-        UnityEngine.Debug.Log("Position: " + obj.transform.position);
-        UnityEngine.Debug.Log("Rotation: " + obj.transform.rotation);
-        UnityEngine.Debug.Log("Scale: " + obj.transform.localScale);
-
-        foreach (Component comp in obj.GetComponents<Component>())
-        {
-            UnityEngine.Debug.Log("Component: " + comp.GetType().ToString());
-        }
     }
 
     void SetupRecorder()
